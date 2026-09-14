@@ -1,0 +1,14 @@
+# Local CLion settings
+/.idea/
+
+# Build directories (CLion/CMake and Makefile)
+/cmake-build-*/
+/build/
+
+# Generated directories when CMake runs in the source directory
+/CMakeFiles/
+/Testing/
+/.cmake/
+
+# Python bytecode caches, including dependency tooling
+__pycache__/
