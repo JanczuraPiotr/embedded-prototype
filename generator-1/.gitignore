@@ -12,3 +12,5 @@
 
 # Python bytecode caches, including dependency tooling
 __pycache__/
+
+/.settings/

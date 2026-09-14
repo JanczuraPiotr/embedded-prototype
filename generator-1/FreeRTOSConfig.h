@@ -128,7 +128,13 @@ functions anyway. */
 	#define sbSEND_COMPLETED( pxStreamBuffer ) vGenerateCoreBInterrupt( pxStreamBuffer )
 #endif /* configINCLUDE_MESSAGE_BUFFER_AMP_DEMO */
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 extern void vAssertCalled( const char * const pcFileName,  unsigned long ulLine );
+#ifdef __cplusplus
+}
+#endif
 
 /* projCOVERAGE_TEST should be defined on the command line so this file can be
 used with multiple project configurations.  If it is

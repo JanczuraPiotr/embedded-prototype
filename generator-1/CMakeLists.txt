@@ -29,8 +29,14 @@ set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${MCU_FLAGS} -T${LINKER_SC
 
 add_compile_definitions(STM32F767xx)
 
-set(FREERTOS_DIR "${CMAKE_CURRENT_SOURCE_DIR}/FreeRTOS/FreeRTOS")
-set(STM32CUBE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/Drivers/STM32CubeF7")
+get_filename_component(SHARED_DEPS_DIR "${CMAKE_CURRENT_SOURCE_DIR}/.." ABSOLUTE)
+set(FREERTOS_DIR "${SHARED_DEPS_DIR}/FreeRTOS/FreeRTOS")
+set(STM32CUBE_DIR "${SHARED_DEPS_DIR}/Drivers/STM32CubeF7")
+
+if(NOT EXISTS "${FREERTOS_DIR}/Source/tasks.c" OR
+   NOT EXISTS "${STM32CUBE_DIR}/Drivers/CMSIS/Device/ST/STM32F7xx/Source/Templates/system_stm32f7xx.c")
+    message(FATAL_ERROR "Missing shared dependencies. Run git submodule update --init --recursive from ${SHARED_DEPS_DIR}")
+endif()
 
 
 add_compile_definitions(projCOVERAGE_TEST=0)
