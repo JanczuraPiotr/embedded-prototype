@@ -46,7 +46,7 @@ file(GLOB FREERTOS_CORE_SOURCES "${FREERTOS_DIR}/Source/*.c")
 set(FREERTOS_SOURCES
         ${FREERTOS_CORE_SOURCES}
         "${FREERTOS_DIR}/Source/portable/GCC/ARM_CM7/r0p1/port.c"
-        "${FREERTOS_DIR}/Source/portable/MemMang/heap_4.c" # heap_4 jest lepszy dla mikrokontrolerÛw niø heap_3
+        "${FREERTOS_DIR}/Source/portable/MemMang/heap_4.c" # heap_4 jest lepszy dla mikrokontroler√≥w ni≈º heap_3
 )
 
 set(CMSIS_SOURCES
@@ -91,7 +91,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE freertos cmsis)
 add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
         COMMAND ${CMAKE_OBJCOPY} -O ihex ${PROJECT_NAME} ${PROJECT_NAME}.hex
         COMMAND ${CMAKE_OBJCOPY} -O binary ${PROJECT_NAME} ${PROJECT_NAME}.bin
-        COMMENT "Generowanie plikÛw Flash (.hex i .bin)..."
+        COMMENT "Generowanie plik√≥w Flash (.hex i .bin)..."
 )
 
 message("CMAKE_CURRENT_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}")

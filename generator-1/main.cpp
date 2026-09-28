@@ -29,12 +29,12 @@ void SystemClock_Config_216MHz(void) {
 
     RCC->CFGR |= RCC_CFGR_HPRE_DIV1 | RCC_CFGR_PPRE1_DIV4 | RCC_CFGR_PPRE2_DIV2;
 
-    // Cel: 216 MHz. Wzór: SYSCLK = (HSI / M) * N / P
-    // M = 16 -> (16MHz / 16) = 1 MHz (zalecana czêstotliwoœæ wejœciowa PLL)
+    // Cel: 216 MHz. WzÃ³r: SYSCLK = (HSI / M) * N / P
+    // M = 16 -> (16MHz / 16) = 1 MHz (zalecana czÄ™stotliwoÅ›Ä‡ wejÅ›ciowa PLL)
     // N = 432 -> 1 MHz * 432 = 432 MHz
     // P = 2 -> 432 MHz / 2 = 216 MHz
-    // Poprawna konfiguracja PLL dla 216 MHz z wewnêtrznego zegara HSI (16MHz):
-    // M=8 (16/8 = 2MHz wejœcie PLL), N=216 (2*216 = 432MHz), P=2 (432/2 = 216MHz)
+    // Poprawna konfiguracja PLL dla 216 MHz z wewnÄ™trznego zegara HSI (16MHz):
+    // M=8 (16/8 = 2MHz wejÅ›cie PLL), N=216 (2*216 = 432MHz), P=2 (432/2 = 216MHz)
     RCC->PLLCFGR = (8 << RCC_PLLCFGR_PLLM_Pos)   |
                    (216 << RCC_PLLCFGR_PLLN_Pos) |
                    (0 << RCC_PLLCFGR_PLLP_Pos)   |
