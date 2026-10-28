@@ -65,9 +65,10 @@ void Hardware_Init()
     RCC->AHB1ENR |= RCC_AHB1ENR_GPIOBEN | RCC_AHB1ENR_GPIOCEN;
     __asm("DSB");
 
+    // Czyszczenie bitów konfiguracji dla Pinu 0 pozycja 0 i 1
     GPIOC->MODER &= ~(3U << (8 * 2));
+    // Ustawienie trybu "General purpose output mode" (wartość 01 binarne na pozycji 0)
     GPIOC->MODER |= (1U << (8 * 2));
-    GPIOC->MODER &= ~(3U << (13 * 2));
 }
 
 void vGpioControlTask(void *pvParameters)
