@@ -69,10 +69,9 @@ add_library(cmsis OBJECT ${CMSIS_SOURCES})
 
 add_executable(${PROJECT_NAME}
         main.cpp
-        ${PROJECT_ROOT}/lib/System.cpp   ${PROJECT_ROOT}/lib/System.hpp
-        ${PROJECT_ROOT}/lib/ST7920.cpp   ${PROJECT_ROOT}/lib/ST7920.hpp
-        st7920.hpp
-        st7920.cpp
+        ${PROJECT_ROOT}/lib/System.hpp
+        ${PROJECT_ROOT}/lib/FreeRTOS.hpp
+        ${PROJECT_ROOT}/lib/ST7920.hpp
 )
 
 # Relink whenever the memory layout changes.

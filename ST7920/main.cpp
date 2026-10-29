@@ -2,14 +2,15 @@
 #include <sys/types.h>
 #include "FreeRTOS.h"
 #include "task.h"
-#include "../lib/ST7920.hpp"
 #include "stm32f4xx.h"
+#include "../lib/ST7920.hpp"
+#include "../lib/FreeRTOS.hpp"
 
 
 extern "C" {
 
-void vAssertCalled(const char *const pcFileName, unsigned long ulLine);
-void vApplicationMallocFailedHook(void);
+// void vAssertCalled(const char *const pcFileName, unsigned long ulLine);
+// void vApplicationMallocFailedHook(void);
 void hardware_init();
 void SystemClock_Config_100MHz();
 void GPIO_SPI1_Register_Init();
@@ -20,8 +21,12 @@ void vGpioControlTask(void *pvParameters);
 
 }
 
-System system;
-pj::ST7920 lcd(system);
+pj::FreeRTOS system;
+pj::ST7920 lcd(system,
+    SPI1,
+    []() { GPIOB->BSRR = GPIO_BSRR_BS6; },
+    []() { GPIOB->BSRR = GPIO_BSRR_BR6; }
+    );
 
 
 int main() {
@@ -30,7 +35,7 @@ int main() {
     Hardware_Init();
 
 
-    xTaskCreate(vLcdTask, "lcdTask", 128 * 4, NULL, (tskIDLE_PRIORITY + 1UL), NULL);
+    xTaskCreate(vLcdTask, "lcdTask", 128 * 4,nullptr, (tskIDLE_PRIORITY + 1UL), nullptr);
 
     vTaskStartScheduler();
 
@@ -107,6 +112,8 @@ void vLcdTask(void *argument) {
 
 void SystemClock_Config_100MHz(void)
 {
+    // NOTE AI
+
     /* 1. Włączenie zasilania (Power Interface Clock) aby zmienić napięcie rdzenia */
     RCC->APB1ENR |= RCC_APB1ENR_PWREN;
     PWR->CR |= PWR_CR_VOS_0 | PWR_CR_VOS_1; // Scale 1 (wymagane dla > 84 MHz)
@@ -143,6 +150,7 @@ void SystemClock_Config_100MHz(void)
 
 extern "C" void GPIO_SPI1_Register_Init(void)
 {
+    // NOTE AI
     /* 1. Włączenie zegarów dla portów GPIOA, GPIOB oraz peryferium SPI1 */
     RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN | RCC_AHB1ENR_GPIOBEN;
     __asm("DSB"); // Wymuszenie zakończenia zapisu w pamięci
