@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$/.." vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../Drivers/STM32CubeF4" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../Drivers/STM32CubeF4/Drivers/CMSIS/Device/ST/STM32F4xx" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../Drivers/STM32CubeF7" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../Drivers/STM32CubeF7/Drivers/CMSIS/Device/ST/STM32F7xx" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../FreeRTOS" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../FreeRTOS/FreeRTOS/Source" vcs="Git" />
+  </component>
+</project>

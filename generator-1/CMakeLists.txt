@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.15)
+cmake_minimum_required(VERSION 3.30)
 
 set(CMAKE_SYSTEM_NAME Generic)
 set(CMAKE_SYSTEM_PROCESSOR arm)
@@ -9,9 +9,9 @@ set(CMAKE_TRY_COMPILE_TARGET_TYPE STATIC_LIBRARY)
 
 project(EmbGenerator1 C CXX ASM)
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_C_STANDARD 11)
+set(CMAKE_C_STANDARD 23)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 
 set(MCU_FLAGS "-mcpu=cortex-m7 -mthumb -mfpu=fpv5-sp-d16 -mfloat-abi=hard")
@@ -46,7 +46,7 @@ file(GLOB FREERTOS_CORE_SOURCES "${FREERTOS_DIR}/Source/*.c")
 set(FREERTOS_SOURCES
         ${FREERTOS_CORE_SOURCES}
         "${FREERTOS_DIR}/Source/portable/GCC/ARM_CM7/r0p1/port.c"
-        "${FREERTOS_DIR}/Source/portable/MemMang/heap_4.c" # heap_4 jest lepszy dla mikrokontrolerÛw niø heap_3
+        "${FREERTOS_DIR}/Source/portable/MemMang/heap_4.c" # heap_4 jest lepszy dla mikrokontroler√≥w ni≈º heap_3
 )
 
 set(CMSIS_SOURCES
@@ -91,7 +91,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE freertos cmsis)
 add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
         COMMAND ${CMAKE_OBJCOPY} -O ihex ${PROJECT_NAME} ${PROJECT_NAME}.hex
         COMMAND ${CMAKE_OBJCOPY} -O binary ${PROJECT_NAME} ${PROJECT_NAME}.bin
-        COMMENT "Generowanie plikÛw Flash (.hex i .bin)..."
+        COMMENT "Generowanie plik√≥w Flash (.hex i .bin)..."
 )
 
 message("CMAKE_CURRENT_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}")
